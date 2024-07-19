@@ -37,13 +37,18 @@ test('Open the Network tab', async () => {
 
 test('Click on the "Connect" button for all mutual connections', async () => {
   const network = new NetworkPage(page);
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(3000);
+
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
 
   const buttons = await network.connectButtons.all()
+
+  // await page.waitForTimeout(3000);
 
   await network.hideChatButton.click()
 
   for (const button of buttons) {
+    await  button.scrollIntoViewIfNeeded()
     await button.click()
   }
 

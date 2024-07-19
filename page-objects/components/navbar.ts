@@ -1,4 +1,4 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import { type Locator, type Page } from '@playwright/test';
 
 export class NavbarComponent {
     readonly page: Page;
@@ -9,7 +9,7 @@ export class NavbarComponent {
 
     constructor(page: Page) {
         this.page = page;
-        this.networkTab = page.locator('a[href*="mynetwork"]');
+        this.networkTab = page.getByRole('link', { name: 'My Network', exact: true });
         this.jobsTab = page.locator('a[href*="jobs"]');
         this.messageTab = page.locator('a[href*="messaging"]');
         this.notificationTab = page.locator('a[href*="notifications"]');
