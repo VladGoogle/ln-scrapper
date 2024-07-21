@@ -9,7 +9,7 @@ export class NavbarComponent {
 
     constructor(page: Page) {
         this.page = page;
-        this.networkTab = page.getByRole('link', { name: 'My Network', exact: true });
+        this.networkTab = page.locator('a[href="https://www.linkedin.com/mynetwork/?"]');
         this.jobsTab = page.locator('a[href*="jobs"]');
         this.messageTab = page.locator('a[href*="messaging"]');
         this.notificationTab = page.locator('a[href*="notifications"]');

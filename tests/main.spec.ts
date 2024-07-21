@@ -26,30 +26,36 @@ test.afterAll(async () => {
 test('Login to account', async () => {
   const loginPage = new LoginPage(page);
   const basePage = new BasePage(page);
+
   await basePage.signInButton.click()
   await loginPage.login(process.env.EMAIL, process.env.PASSWORD);
 });
 
 test('Open the Network tab', async () => {
   const navbar = new NavbarComponent(page);
+  await page.waitForTimeout(3000);
   await navbar.networkTab.click();
 });
 
 test('Click on the "Connect" button for all mutual connections', async () => {
   const network = new NetworkPage(page);
-  await page.waitForTimeout(3000);
 
-  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForTimeout(4000);
 
   const buttons = await network.connectButtons.all()
-
-  // await page.waitForTimeout(3000);
 
   await network.hideChatButton.click()
 
   for (const button of buttons) {
     await  button.scrollIntoViewIfNeeded()
     await button.click()
+    await page.waitForTimeout(1500);
+
+    if(await network.limitPopup.isVisible()) {
+      await network.limitPopupCloseButton.click()
+      await page.waitForTimeout(1000);
+    }
+
   }
 
 });
