@@ -40,7 +40,7 @@ test('Open the Network tab', async () => {
 test('Click on the "Connect" button for all mutual connections', async () => {
   const network = new NetworkPage(page);
 
-  await page.waitForTimeout(4000);
+  await page.waitForTimeout(3000);
 
   let buttons = await network.connectButtons.all()
 
@@ -53,13 +53,20 @@ test('Click on the "Connect" button for all mutual connections', async () => {
     for (const button of buttons) {
       await  button.scrollIntoViewIfNeeded()
       await button.click()
+      await page.waitForTimeout(2000)
 
-      if(await network.limitLastPopup.isVisible()) {
+      let check = await network.limitLastPopup.isVisible()
+
+      if(check) {
         isClosed = true
         break
       }
 
-      await page.waitForTimeout(1500);
+      // if (isClosed) {
+      //   break;
+      // }
+
+      await page.waitForTimeout(1000);
 
       if(await network.limitWarningPopup.isVisible()) {
         await network.limitPopupCloseButton.click()
