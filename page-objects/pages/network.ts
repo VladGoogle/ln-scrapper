@@ -14,7 +14,7 @@ export class NetworkPage {
         this.growTab = page.locator('xpath=/html/body/div[5]/div[3]/div/div/div/div/div[2]/div/div/main/div[1]/div/div/button[1]');
         this.connectButtons = page.locator('button[aria-label*="connect"]');
         this.hideChatButton = page.locator('xpath=/html/body/div[5]/div[4]/aside[1]/div[1]/header/div[3]/button[2]')
-        this.limitLastPopup = page.getByRole('heading', { name: 'You’ve reached the weekly' })
+        this.limitLastPopup = page.getByText('was not sent')
         this.limitWarningPopup = page.locator('#ip-fuse-limit-alert__header')
         this.limitPopupCloseButton = page.getByLabel('Got it')
     }
